@@ -102,4 +102,3 @@ const redraw = () => {
     }
 
 }
-window.load = redraw
