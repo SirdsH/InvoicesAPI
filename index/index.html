@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="indexJS.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.css">
+</head>
+<body>
+
+<div class="modal fade" id="create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create invoice</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="inputCompany">Company</label>
+                    <input type="email" class="form-control" id="inputCompany" aria-describedby="emailHelp"
+                           placeholder="Enter company name">
+                </div>
+                <div class="form-group">
+                    <label for="inputAmount">Amount</label>
+                    <input class="form-control" id="inputAmount" aria-describedby="firstNameHelp"
+                           placeholder="Enter amount">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="createBtn" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <ul class="list-group">
+        <li class="d-flex justify-content-between list-group-item list-group-item-dark"><strong>Company</strong>
+            <span><strong>Amount</strong></span></li>
+        <div class="" id="writeOut"></div>
+    </ul>
+
+    <div class="text-end">
+        <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#create">
+            Create a new invoice
+        </button>
+    </div>
+    <div class="" id="trueOrNot"></div>
+</div>
+</body>
+</html>
