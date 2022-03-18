@@ -9,6 +9,38 @@ const redraw = () => {
     let trueOrNot = document.getElementById('trueOrNot')
     trueOrNot.innerHTML = ""
 
+    let textWrapper = document.querySelector('.ml11 .letters');
+    textWrapper.innerHTML = textWrapper.textContent.replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>");
+
+    anime.timeline({loop: true})
+        .add({
+            targets: '.ml11 .line',
+            scaleY: [0,1],
+            opacity: [0.5,1],
+            easing: "easeOutExpo",
+            duration: 700
+        })
+        .add({
+            targets: '.ml11 .line',
+            translateX: [0, document.querySelector('.ml11 .letters').getBoundingClientRect().width + 10],
+            easing: "easeOutExpo",
+            duration: 700,
+            delay: 100
+        }).add({
+        targets: '.ml11 .letter',
+        opacity: [0,1],
+        easing: "easeOutExpo",
+        duration: 600,
+        offset: '-=775',
+        delay: (el, i) => 34 * (i+1)
+    }).add({
+        targets: '.ml11',
+        opacity: 0,
+        duration: 1000,
+        easing: "easeOutExpo",
+        delay: 1000
+    });
+
 
     fetch('http://164.92.142.211/9f7c75e9-6dfa-44f0-be35-456e466ce394/Invoices', {
         method: 'GET'
@@ -17,11 +49,17 @@ const redraw = () => {
         .then((data) => {
             console.log(data)
 
-            const sum = data.filter(i => i.paid).reduce((a,b) => a + b.amount, 0)
-            const sum2 = data.filter(i => !i.paid).reduce((a,b) => a + b.amount, 0)
+            const sum = data.filter(i => i.paid).reduce((a, b) => a + b.amount, 0)
+            const sum2 = data.filter(i => !i.paid).reduce((a, b) => a + b.amount, 0)
+
+
             console.log(sum)
             let div = document.createElement('div')
+            div.className = 'text-success'
+
             let div2 = document.createElement('div')
+            div2.className = 'text-danger'
+
             div.innerHTML = `<strong>Paid Invoices:</strong> ${sum}`
             div2.innerHTML = `<strong>Not Paid Invoices:</strong> ${sum2}`
             trueOrNot.appendChild(div)
@@ -29,6 +67,7 @@ const redraw = () => {
 
 
             for (let i = 0; i < data.length; i++) {
+
 
                 let li = document.createElement("li")
                 li.className = "d-flex justify-content-between list-group-item"
